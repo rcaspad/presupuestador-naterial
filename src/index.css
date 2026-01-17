@@ -6,28 +6,25 @@
 
 @layer base {
     :root {
-        /* Refined Light Theme - High Contrast Professional */
+        /* Professional Corporate Light Theme */
         --background: #f1f5f9;
-        /* Slightly darker slate-100 base */
         --foreground: #020617;
-        /* Slate-950 for maximum readability */
-        --glass-bg: #ffffff;
-        /* Solid white for panels in light mode */
-        --glass-border: #cbd5e1;
-        /* Slate-300 borders */
+        --panel-bg: #ffffff;
+        --panel-border: #e2e8f0;
         --card-bg: #ffffff;
-        --card-border: #e2e8f0;
-        --text-muted: #475569;
+        --card-border: #cbd5e1;
+        --text-muted: #64748b;
         font-family: 'Inter', system-ui, sans-serif;
     }
 
     .dark {
-        --background: #030712;
-        --foreground: #f1f5f9;
-        --glass-bg: rgba(255, 255, 255, 0.03);
-        --glass-border: rgba(255, 255, 255, 0.1);
-        --card-bg: rgba(255, 255, 255, 0.02);
-        --card-border: rgba(255, 255, 255, 0.05);
+        /* High Contrast Dark Corporate Theme */
+        --background: #0f172a;
+        --foreground: #f8fafc;
+        --panel-bg: #1e293b;
+        --panel-border: #334155;
+        --card-bg: #1e293b;
+        --card-border: #334155;
         --text-muted: #94a3b8;
     }
 }
@@ -39,7 +36,7 @@ body {
     background-color: var(--background);
     color: var(--foreground);
     overflow-x: hidden;
-    transition: background-color 0.4s ease, color 0.4s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::-webkit-scrollbar {
@@ -47,51 +44,43 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    @apply bg-transparent;
+    @apply bg-slate-100 dark:bg-slate-900;
 }
 
 ::-webkit-scrollbar-thumb {
-    @apply bg-slate-300 dark:bg-slate-800 rounded-full hover:bg-slate-400 dark:hover:bg-slate-700 transition-colors;
+    @apply bg-slate-300 dark:bg-slate-700 rounded-full hover:bg-slate-400 dark:hover:bg-slate-600 transition-colors;
 }
 
+/* Institutional Panels */
 .glass-panel {
-    background-color: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    background-color: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
 .dark .glass-panel {
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 .glass-card {
     background-color: var(--card-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--card-border);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .glass-card:hover {
     border-color: #669900;
     /* LM Green */
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
 }
 
 .dark .glass-card:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: none;
-}
-
-/* Specific styling for inputs to ensure visibility */
-input[type="number"] {
-    color: var(--foreground);
+    border-color: #8ec641;
 }
 
 .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 dark:from-white dark:via-white dark:to-slate-500;
+    /* Removed gradient for more serious tone */
+    @apply text-slate-900 dark:text-white;
 }
 
 @media print {
@@ -109,24 +98,10 @@ input[type="number"] {
         border: 1px solid #e2e8f0 !important;
         background: white !important;
         box-shadow: none !important;
-        backdrop-filter: none !important;
     }
 }
 
-@keyframes float {
-    0% {
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-
-    100% {
-        transform: translateY(0px);
-    }
-}
-
-.animate-float {
-    animation: float 6s ease-in-out infinite;
+/* Clean UI items */
+.corporate-header {
+    @apply border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900;
 }
