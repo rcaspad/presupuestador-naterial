@@ -9,8 +9,16 @@ export default {
             colors: {
                 background: "hsl(var(--background))",
                 foreground: "hsl(var(--foreground))",
+                leroy: {
+                    green: "#669900",
+                    dark: "#517a00",
+                    light: "#8ec641",
+                    100: "#f0f7e6",
+                    200: "#d9ebb3",
+                    500: "#669900", // Main brand green
+                },
                 primary: {
-                    DEFAULT: "#f59e0b",
+                    DEFAULT: "#669900",
                     foreground: "#ffffff",
                 },
                 slate: {
@@ -19,11 +27,6 @@ export default {
                     800: "#1e293b",
                     700: "#334155",
                 },
-                amber: {
-                    500: "#f59e0b",
-                    600: "#d97706",
-                    400: "#fbbf24",
-                }
             },
             boxShadow: {
                 'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.4)',
