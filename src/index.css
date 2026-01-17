@@ -6,15 +6,17 @@
 
 @layer base {
     :root {
-        /* Adjusted Light Theme - More Professional & Contrast */
-        --background: #f8fafc;
-        /* Not pure white, more solid */
-        --foreground: #0f172a;
-        --glass-bg: rgba(255, 255, 255, 0.85);
-        --glass-border: rgba(102, 153, 0, 0.15);
-        /* Hint of LM Green */
+        /* Refined Light Theme - High Contrast Professional */
+        --background: #f1f5f9;
+        /* Slightly darker slate-100 base */
+        --foreground: #020617;
+        /* Slate-950 for maximum readability */
+        --glass-bg: #ffffff;
+        /* Solid white for panels in light mode */
+        --glass-border: #cbd5e1;
+        /* Slate-300 borders */
         --card-bg: #ffffff;
-        --card-border: rgba(0, 0, 0, 0.08);
+        --card-border: #e2e8f0;
         --text-muted: #475569;
         font-family: 'Inter', system-ui, sans-serif;
     }
@@ -37,7 +39,7 @@ body {
     background-color: var(--background);
     color: var(--foreground);
     overflow-x: hidden;
-    transition: background-color 0.5s ease, color 0.5s ease;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 ::-webkit-scrollbar {
@@ -57,7 +59,7 @@ body {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
-    box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 .dark .glass-panel {
@@ -69,13 +71,13 @@ body {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--card-border);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
 }
 
 .glass-card:hover {
     border-color: #669900;
     /* LM Green */
-    box-shadow: 0 10px 25px -5px rgba(102, 153, 0, 0.1);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 }
 
 .dark .glass-card:hover {
@@ -83,8 +85,13 @@ body {
     box-shadow: none;
 }
 
+/* Specific styling for inputs to ensure visibility */
+input[type="number"] {
+    color: var(--foreground);
+}
+
 .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-slate-800 to-slate-500 dark:from-white dark:via-white dark:to-slate-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 dark:from-white dark:via-white dark:to-slate-500;
 }
 
 @media print {

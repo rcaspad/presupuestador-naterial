@@ -261,28 +261,28 @@ const App = () => {
               Dimensionado
             </h3>
             <div className="grid grid-cols-2 gap-4">
-              <div className="glass-card p-6 rounded-[2rem] group">
-                <span className="block text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase mb-3 px-1 group-focus-within:text-leroy-green transition-colors">Superficie</span>
+              <div className="glass-card p-6 rounded-[2rem] group hover:border-leroy-green/50 transition-all focus-within:ring-2 focus-within:ring-leroy-green/20">
+                <span className="block text-[9px] font-black text-slate-500 dark:text-slate-500 uppercase mb-3 px-1 group-focus-within:text-leroy-green transition-colors">Superficie</span>
                 <div className="flex items-baseline gap-2">
                   <input
                     type="number"
                     value={m2}
                     onChange={e => setM2(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-transparent text-4xl font-black outline-none text-slate-900 dark:text-white tracking-tighter"
+                    className="w-full bg-transparent text-4xl font-black outline-none text-slate-950 dark:text-white tracking-tighter placeholder:text-slate-300"
                   />
-                  <span className="text-slate-400 dark:text-slate-600 font-bold text-sm">m²</span>
+                  <span className="text-slate-500 dark:text-slate-600 font-bold text-sm">m²</span>
                 </div>
               </div>
-              <div className="glass-card p-6 rounded-[2rem] group">
-                <span className="block text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase mb-3 px-1 group-focus-within:text-leroy-green transition-colors">Perímetro</span>
+              <div className="glass-card p-6 rounded-[2rem] group hover:border-leroy-green/50 transition-all focus-within:ring-2 focus-within:ring-leroy-green/20">
+                <span className="block text-[9px] font-black text-slate-500 dark:text-slate-500 uppercase mb-3 px-1 group-focus-within:text-leroy-green transition-colors">Perímetro</span>
                 <div className="flex items-baseline gap-2">
                   <input
                     type="number"
                     value={perimetro}
                     onChange={e => setPerimetro(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-transparent text-4xl font-black outline-none text-slate-900 dark:text-white tracking-tighter"
+                    className="w-full bg-transparent text-4xl font-black outline-none text-slate-950 dark:text-white tracking-tighter placeholder:text-slate-300"
                   />
-                  <span className="text-slate-400 dark:text-slate-600 font-bold text-sm">ml</span>
+                  <span className="text-slate-500 dark:text-slate-600 font-bold text-sm">ml</span>
                 </div>
               </div>
             </div>
@@ -398,12 +398,12 @@ const App = () => {
 
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 pt-8 border-t border-slate-200 dark:border-white/5 text-left">
                   <div className="space-y-1">
-                    <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest leading-none">Unidades de Suelo</p>
-                    <p className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter">{calculos.numUdsSuelo} <span className="text-xs text-slate-400 dark:text-slate-600">uds</span></p>
+                    <p className="text-[9px] font-black text-slate-500 dark:text-slate-500 uppercase tracking-widest leading-none">Unidades de Suelo</p>
+                    <p className="text-2xl font-black text-slate-950 dark:text-white tracking-tighter">{calculos.numUdsSuelo} <span className="text-xs text-slate-500 dark:text-slate-600">uds</span></p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest leading-none">Superficie Instalada</p>
-                    <p className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter">{calculos.m2Reales.toFixed(2)} <span className="text-xs text-slate-400 dark:text-slate-600">m²</span></p>
+                    <p className="text-[9px] font-black text-slate-500 dark:text-slate-500 uppercase tracking-widest leading-none">Superficie Instalada</p>
+                    <p className="text-2xl font-black text-slate-950 dark:text-white tracking-tighter">{calculos.m2Reales.toFixed(2)} <span className="text-xs text-slate-500 dark:text-slate-600">m²</span></p>
                   </div>
                   <div className="space-y-1 hidden lg:block">
                     <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest leading-none">Disponibilidad</p>
@@ -422,7 +422,7 @@ const App = () => {
                       <div className="flex items-center gap-4">
                         <div className="w-14 h-14 rounded-2xl shadow-xl border-2 border-white dark:border-white/10" style={{ backgroundColor: variante.color }} />
                         <div>
-                          <p className="font-black text-slate-900 dark:text-white tracking-tight">{variante.nombre}</p>
+                          <p className="font-black text-slate-950 dark:text-white tracking-tight">{variante.nombre}</p>
                           <p className="text-[9px] font-mono text-leroy-green font-bold uppercase">{variante.ref}</p>
                         </div>
                       </div>
@@ -464,7 +464,7 @@ const App = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter leading-none">{calculos.numUdsSuelo}</p>
+                    <p className="text-4xl font-black text-slate-950 dark:text-white tracking-tighter leading-none">{calculos.numUdsSuelo}</p>
                     <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-2">Unidades</p>
                     <p className="text-leroy-green font-bold text-lg mt-4">{calculos.costeSuelo.toLocaleString('es-ES', { minimumFractionDigits: 2 })}€</p>
                   </div>
