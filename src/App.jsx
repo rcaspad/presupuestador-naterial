@@ -17,7 +17,9 @@ import {
   ArrowRight,
   Download,
   ShieldCheck,
-  Zap
+  Zap,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { clsx } from 'clsx';
@@ -124,12 +126,21 @@ const ACCESORIOS = {
 };
 
 const App = () => {
+  const [isDark, setIsDark] = useState(true);
   const [tipo, setTipo] = useState('lamas');
   const [gamaKey, setGamaKey] = useState('dolma');
   const [varianteIdx, setVarianteIdx] = useState(0);
   const [travesañoKey, setTravesañoKey] = useState('composite');
   const [m2, setM2] = useState(15);
   const [perimetro, setPerimetro] = useState(12);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
 
   useEffect(() => {
     const keys = Object.keys(PRODUCTOS[tipo].gamas);
@@ -180,12 +191,12 @@ const App = () => {
   }, [tipo, gama, variante, travesaño, clipInfo, m2, perimetro]);
 
   return (
-    <div className="min-h-screen bg-[#030712] text-slate-200 selection:bg-amber-500/30 selection:text-amber-200">
+    <div className="min-h-screen selection:bg-amber-500/30 selection:text-amber-600 transition-colors duration-500">
       {/* Background Decor */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-amber-600/10 rounded-full blur-[120px] animate-pulse-slow" />
-        <div className="absolute top-[20%] -right-[10%] w-[50%] h-[50%] bg-blue-600/5 rounded-full blur-[100px]" />
-        <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+        <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-amber-600/10 dark:bg-amber-600/10 rounded-full blur-[120px] animate-pulse-slow" />
+        <div className="absolute top-[20%] -right-[10%] w-[50%] h-[50%] bg-blue-600/5 dark:bg-blue-600/5 rounded-full blur-[100px]" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-10" />
       </div>
 
       {/* Modern Navigation */}
@@ -196,16 +207,25 @@ const App = () => {
               <Zap className="text-white fill-current" size={20} />
             </div>
             <div>
-              <h1 className="font-black text-lg tracking-tight leading-none">NATERIAL</h1>
-              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none">Configurator 2026</span>
+              <h1 className="font-black text-lg tracking-tight leading-none text-slate-900 dark:text-white">NATERIAL</h1>
+              <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest leading-none">Configurator 2026</span>
             </div>
           </div>
           <div className="flex items-center gap-3">
+            {/* Theme Toggle */}
+            <button
+              onClick={() => setIsDark(!isDark)}
+              className="w-10 h-10 flex items-center justify-center rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:scale-110 transition-all duration-300"
+              title="Cambiar Tema"
+            >
+              {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <div className="w-px h-6 bg-slate-200 dark:bg-white/10 mx-1" />
             <button
               onClick={() => window.print()}
-              className="flex items-center gap-2 bg-white text-slate-950 px-5 py-2.5 rounded-2xl text-xs font-bold hover:bg-slate-200 transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-white/5"
+              className="flex items-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-950 px-5 py-2.5 rounded-2xl text-xs font-bold hover:opacity-90 transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-slate-900/10 dark:shadow-white/5"
             >
-              <Download size={14} /> Exportar Presupuesto
+              <Download size={14} /> Exportar
             </button>
           </div>
         </div>
@@ -226,7 +246,7 @@ const App = () => {
                   "flex-1 py-3 px-6 rounded-2xl text-xs font-black transition-all duration-300",
                   tipo === k
                     ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5'
                 )}
               >
                 {PRODUCTOS[k].titulo.split(' ')[0].toUpperCase()}
@@ -236,33 +256,33 @@ const App = () => {
 
           {/* Input Metrics */}
           <section className="space-y-6">
-            <h3 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3 px-2">
+            <h3 className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3 px-2">
               <Ruler size={12} className="text-amber-500" />
               Dimensionado
             </h3>
             <div className="grid grid-cols-2 gap-4">
               <div className="glass-card p-6 rounded-[2rem] group">
-                <span className="block text-[9px] font-bold text-slate-500 uppercase mb-3 px-1 group-focus-within:text-amber-500 transition-colors">Superficie</span>
+                <span className="block text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase mb-3 px-1 group-focus-within:text-amber-500 transition-colors">Superficie</span>
                 <div className="flex items-baseline gap-2">
                   <input
                     type="number"
                     value={m2}
                     onChange={e => setM2(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-transparent text-4xl font-black outline-none text-white tracking-tighter"
+                    className="w-full bg-transparent text-4xl font-black outline-none text-slate-900 dark:text-white tracking-tighter"
                   />
-                  <span className="text-slate-600 font-bold text-sm">m²</span>
+                  <span className="text-slate-400 dark:text-slate-600 font-bold text-sm">m²</span>
                 </div>
               </div>
               <div className="glass-card p-6 rounded-[2rem] group">
-                <span className="block text-[9px] font-bold text-slate-500 uppercase mb-3 px-1 group-focus-within:text-amber-500 transition-colors">Perímetro</span>
+                <span className="block text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase mb-3 px-1 group-focus-within:text-amber-500 transition-colors">Perímetro</span>
                 <div className="flex items-baseline gap-2">
                   <input
                     type="number"
                     value={perimetro}
                     onChange={e => setPerimetro(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-transparent text-4xl font-black outline-none text-white tracking-tighter"
+                    className="w-full bg-transparent text-4xl font-black outline-none text-slate-900 dark:text-white tracking-tighter"
                   />
-                  <span className="text-slate-600 font-bold text-sm">ml</span>
+                  <span className="text-slate-400 dark:text-slate-600 font-bold text-sm">ml</span>
                 </div>
               </div>
             </div>
@@ -270,7 +290,7 @@ const App = () => {
 
           {/* Collections */}
           <section className="space-y-6">
-            <h3 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3 px-2">
+            <h3 className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3 px-2">
               <Layers size={12} className="text-amber-500" />
               Colecciones
             </h3>
@@ -281,18 +301,18 @@ const App = () => {
                   onClick={() => setGamaKey(key)}
                   className={cn(
                     "glass-card p-6 rounded-3xl cursor-pointer group relative overflow-hidden",
-                    gamaKey === key ? 'border-amber-500/50 bg-amber-500/[0.03]' : ''
+                    gamaKey === key ? 'border-amber-500/50 bg-amber-500/[0.03] dark:bg-amber-500/[0.03]' : ''
                   )}
                 >
-                  <div className="flex justify-between items-start">
+                  <div className="flex justify-between items-start text-left">
                     <div>
-                      <h4 className={cn("font-black text-lg tracking-tight transition-colors", gamaKey === key ? 'text-amber-500' : 'text-slate-200')}>
+                      <h4 className={cn("font-black text-lg tracking-tight transition-colors", gamaKey === key ? 'text-amber-500' : 'text-slate-800 dark:text-slate-200')}>
                         {info.nombre}
                       </h4>
-                      <p className="text-[9px] font-bold text-slate-500 uppercase mt-1 tracking-wider">{info.descripcion}</p>
+                      <p className="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase mt-1 tracking-wider">{info.descripcion}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-xs font-black text-white">{info.precioM2}€/m²</p>
+                      <p className="text-xs font-black text-slate-900 dark:text-white">{info.precioM2}€/m²</p>
                     </div>
                   </div>
 
@@ -310,7 +330,7 @@ const App = () => {
                               onClick={(e) => { e.stopPropagation(); setVarianteIdx(i); }}
                               className={cn(
                                 "w-10 h-10 rounded-xl border-2 transition-all p-0.5 relative",
-                                varianteIdx === i ? 'border-amber-500 scale-110 shadow-lg shadow-amber-500/20' : 'border-white/5 opacity-40 hover:opacity-100'
+                                varianteIdx === i ? 'border-amber-500 scale-110 shadow-lg shadow-amber-500/20' : 'border-slate-200 dark:border-white/5 opacity-40 hover:opacity-100'
                               )}
                             >
                               <div className="w-full h-full rounded-lg" style={{ backgroundColor: v.color }} />
@@ -329,7 +349,7 @@ const App = () => {
           {/* Structure Selector */}
           {tipo === 'lamas' && (
             <section className="space-y-6">
-              <h3 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3 px-2">
+              <h3 className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3 px-2">
                 <Construction size={12} className="text-amber-500" />
                 Estructura
               </h3>
@@ -340,14 +360,14 @@ const App = () => {
                     onClick={() => setTravesañoKey(key)}
                     className={cn(
                       "flex-1 p-4 rounded-3xl glass-card transition-all text-left group",
-                      travesañoKey === key ? 'border-white/20 bg-white/5' : 'opacity-50'
+                      travesañoKey === key ? 'border-slate-300 dark:border-white/20 bg-slate-100 dark:bg-white/5' : 'opacity-50'
                     )}
                   >
-                    <div className={cn("w-6 h-6 rounded-lg mb-4 flex items-center justify-center transition-colors", travesañoKey === key ? 'bg-amber-500 text-white' : 'bg-slate-800 text-slate-500')}>
+                    <div className={cn("w-6 h-6 rounded-lg mb-4 flex items-center justify-center transition-colors", travesañoKey === key ? 'bg-amber-500 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-500')}>
                       <CheckCircle2 size={12} />
                     </div>
-                    <p className="text-[10px] font-black text-white uppercase tracking-tighter leading-none">{info.nombre.split(' ')[1]}</p>
-                    <p className="text-[9px] font-bold text-slate-500 mt-1 uppercase leading-none">{info.precioMl}€/ml</p>
+                    <p className="text-[10px] font-black text-slate-800 dark:text-white uppercase tracking-tighter leading-none">{info.nombre.split(' ')[1]}</p>
+                    <p className="text-[9px] font-bold text-slate-400 dark:text-slate-500 mt-1 uppercase leading-none">{info.precioMl}€/ml</p>
                   </button>
                 ))}
               </div>
@@ -361,10 +381,10 @@ const App = () => {
           {/* Hero Result */}
           <div className="relative group perspective-1000">
             <div className="absolute inset-0 bg-gradient-to-br from-amber-500 to-amber-700 rounded-5xl blur-[60px] opacity-10 group-hover:opacity-20 transition-opacity" />
-            <div className="glass-panel rounded-5xl p-12 relative overflow-hidden flex flex-col xl:flex-row gap-12 border-white/10">
+            <div className="glass-panel rounded-5xl p-12 relative overflow-hidden flex flex-col xl:flex-row gap-12 border-slate-200 dark:border-white/10">
               <div className="flex-1 space-y-12">
-                <div className="space-y-6">
-                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/5 border border-white/5 text-[10px] font-black text-amber-500 uppercase tracking-[0.2em]">
+                <div className="space-y-6 text-left">
+                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5 text-[10px] font-black text-amber-600 dark:text-amber-500 uppercase tracking-[0.2em]">
                     <Sparkles size={12} className="animate-pulse" />
                     Valor de Cotización
                   </span>
@@ -376,18 +396,18 @@ const App = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 pt-8 border-t border-white/5">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 pt-8 border-t border-slate-200 dark:border-white/5 text-left">
                   <div className="space-y-1">
-                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest leading-none">Unidades de Suelo</p>
-                    <p className="text-2xl font-black text-white tracking-tighter">{calculos.numUdsSuelo} <span className="text-xs text-slate-600">uds</span></p>
+                    <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest leading-none">Unidades de Suelo</p>
+                    <p className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter">{calculos.numUdsSuelo} <span className="text-xs text-slate-400 dark:text-slate-600">uds</span></p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest leading-none">Superficie Instalada</p>
-                    <p className="text-2xl font-black text-white tracking-tighter">{calculos.m2Reales.toFixed(2)} <span className="text-xs text-slate-600">m²</span></p>
+                    <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest leading-none">Superficie Instalada</p>
+                    <p className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter">{calculos.m2Reales.toFixed(2)} <span className="text-xs text-slate-400 dark:text-slate-600">m²</span></p>
                   </div>
                   <div className="space-y-1 hidden lg:block">
-                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest leading-none">Disponibilidad</p>
-                    <div className="flex items-center gap-2 text-emerald-400 font-black text-sm uppercase">
+                    <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest leading-none">Disponibilidad</p>
+                    <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-black text-sm uppercase">
                       <ShieldCheck size={14} /> Inmediata
                     </div>
                   </div>
@@ -395,22 +415,22 @@ const App = () => {
               </div>
 
               <div className="w-full xl:w-72">
-                <div className="bg-white/5 rounded-4xl p-8 border border-white/10 h-full flex flex-col justify-between">
-                  <div className="space-y-6">
-                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Configuración</p>
+                <div className="bg-slate-50 dark:bg-white/5 rounded-4xl p-8 border border-slate-200 dark:border-white/10 h-full flex flex-col justify-between">
+                  <div className="space-y-6 text-left">
+                    <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Configuración</p>
                     <div className="space-y-4">
                       <div className="flex items-center gap-4">
-                        <div className="w-14 h-14 rounded-2xl shadow-2xl border-2 border-white/10" style={{ backgroundColor: variante.color }} />
+                        <div className="w-14 h-14 rounded-2xl shadow-xl border-2 border-white/80 dark:border-white/10" style={{ backgroundColor: variante.color }} />
                         <div>
-                          <p className="font-black text-white tracking-tight">{variante.nombre}</p>
-                          <p className="text-[9px] font-mono text-amber-500/80 font-bold uppercase">{variante.ref}</p>
+                          <p className="font-black text-slate-900 dark:text-white tracking-tight">{variante.nombre}</p>
+                          <p className="text-[9px] font-mono text-amber-600 dark:text-amber-500/80 font-bold uppercase">{variante.ref}</p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="pt-8 mt-8 border-t border-white/5 flex items-center justify-between">
-                    <span className="text-[10px] font-bold text-slate-400 capitalize">Naterial Forest 2026</span>
-                    <Download size={16} className="text-slate-600" />
+                  <div className="pt-8 mt-8 border-t border-slate-200 dark:border-white/5 flex items-center justify-between text-left">
+                    <span className="text-[10px] font-bold text-slate-400 dark:text-slate-400 capitalize">Naterial Forest 2026</span>
+                    <Download size={16} className="text-slate-300 dark:text-slate-600" />
                   </div>
                 </div>
               </div>
@@ -419,88 +439,88 @@ const App = () => {
 
           {/* Detailed Materials List */}
           <section className="space-y-8">
-            <h3 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] px-2 flex items-center gap-4">
+            <h3 className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.4em] px-2 flex items-center gap-4">
               Materiales Específicos
-              <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" />
+              <div className="flex-1 h-px bg-gradient-to-r from-slate-200 dark:from-white/10 to-transparent" />
             </h3>
 
             <div className="grid grid-cols-1 gap-6">
               {/* Product Card */}
-              <div className="glass-panel rounded-4xl p-10 group hover:bg-white/[0.04] transition-colors">
+              <div className="glass-panel rounded-4xl p-10 group hover:bg-slate-50/50 dark:hover:bg-white/[0.04] transition-colors text-left">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
                   <div className="flex gap-8 items-center">
-                    <div className="w-16 h-16 rounded-[2rem] bg-amber-500/10 flex items-center justify-center text-amber-500 border border-amber-500/20 group-hover:scale-110 transition-transform duration-500">
+                    <div className="w-16 h-16 rounded-[2rem] bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-500 border border-amber-500/20 group-hover:scale-110 transition-transform duration-500">
                       <Box size={28} />
                     </div>
                     <div>
-                      <h4 className="font-black text-xl text-white tracking-tight leading-none mb-3">
+                      <h4 className="font-black text-xl text-slate-900 dark:text-white tracking-tight leading-none mb-3">
                         {tipo === 'lamas' ? 'Duela Naterial Professional' : 'Lómina Modular Click'}
                       </h4>
                       <div className="flex flex-wrap items-center gap-3">
-                        <span className="text-xs font-bold text-slate-500">{gama.nombre}</span>
-                        <div className="w-1 h-1 rounded-full bg-slate-700" />
-                        <span className="text-[10px] font-mono font-bold text-amber-500/60 uppercase">PK {variante.ref}</span>
+                        <span className="text-xs font-bold text-slate-400 dark:text-slate-500">{gama.nombre}</span>
+                        <div className="w-1 h-1 rounded-full bg-slate-200 dark:bg-slate-700" />
+                        <span className="text-[10px] font-mono font-bold text-amber-600 dark:text-amber-500/60 uppercase">PK {variante.ref}</span>
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-4xl font-black text-white tracking-tighter leading-none">{calculos.numUdsSuelo}</p>
-                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-2">Unidades</p>
-                    <p className="text-amber-500 font-bold text-lg mt-4">{calculos.costeSuelo.toLocaleString('es-ES', { minimumFractionDigits: 2 })}€</p>
+                    <p className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter leading-none">{calculos.numUdsSuelo}</p>
+                    <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-2">Unidades</p>
+                    <p className="text-amber-600 dark:text-amber-500 font-bold text-lg mt-4">{calculos.costeSuelo.toLocaleString('es-ES', { minimumFractionDigits: 2 })}€</p>
                   </div>
                 </div>
               </div>
 
               {/* Structure Card */}
               {tipo === 'lamas' && (
-                <div className="glass-panel rounded-4xl p-10 group hover:bg-white/[0.04] transition-colors">
+                <div className="glass-panel rounded-4xl p-10 group hover:bg-slate-50/50 dark:hover:bg-white/[0.04] transition-colors text-left">
                   <div className="flex flex-col md:flex-row justify-between items-start gap-8">
                     <div className="flex gap-8 items-start">
-                      <div className="w-16 h-16 rounded-[2rem] bg-blue-500/10 flex items-center justify-center text-blue-500 border border-blue-500/20 group-hover:scale-110 transition-transform duration-500">
+                      <div className="w-16 h-16 rounded-[2rem] bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-500 border border-blue-500/20 group-hover:scale-110 transition-transform duration-500">
                         <Construction size={28} />
                       </div>
                       <div className="space-y-10">
                         <div>
-                          <h4 className="font-black text-xl text-white tracking-tight leading-none mb-3">{travesaño.nombre}</h4>
-                          <p className="text-sm text-slate-500 font-medium opacity-80 max-w-sm">Sistema de rastrelado industrial. Requiere {calculos.numRastreles} piezas de {travesaño.largo}m.</p>
+                          <h4 className="font-black text-xl text-slate-900 dark:text-white tracking-tight leading-none mb-3">{travesaño.nombre}</h4>
+                          <p className="text-sm text-slate-500 dark:text-slate-500 font-medium opacity-80 max-w-sm">Sistema de rastrelado industrial. Requiere {calculos.numRastreles} piezas de {travesaño.largo}m.</p>
                         </div>
                         <div className="flex gap-10">
                           <div>
-                            <p className="text-[9px] font-black text-slate-600 uppercase mb-2">Fijación</p>
-                            <p className="text-sm font-bold text-slate-300">{clipInfo?.nombre} <span className="text-[10px] text-slate-600 px-2">REF {clipInfo?.ref}</span></p>
+                            <p className="text-[9px] font-black text-slate-400 dark:text-slate-600 uppercase mb-2">Fijación</p>
+                            <p className="text-sm font-bold text-slate-700 dark:text-slate-300">{clipInfo?.nombre} <span className="text-[10px] text-slate-400 dark:text-slate-600 px-2">REF {clipInfo?.ref}</span></p>
                           </div>
                           <div>
-                            <p className="text-[9px] font-black text-slate-600 uppercase mb-2">Cantidad</p>
-                            <p className="text-sm font-bold text-slate-300">{calculos.numClips} uds</p>
+                            <p className="text-[9px] font-black text-slate-400 dark:text-slate-600 uppercase mb-2">Cantidad</p>
+                            <p className="text-sm font-bold text-slate-700 dark:text-slate-300">{calculos.numClips} uds</p>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-4xl font-black text-white tracking-tighter leading-none">{calculos.numRastreles}</p>
-                      <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-2">Piezas Travesaño</p>
-                      <p className="text-amber-500 font-bold text-lg mt-4">{calculos.costeEstructura.toLocaleString('es-ES', { minimumFractionDigits: 2 })}€</p>
+                      <p className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter leading-none">{calculos.numRastreles}</p>
+                      <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-2">Piezas Travesaño</p>
+                      <p className="text-amber-600 dark:text-amber-500 font-bold text-lg mt-4">{calculos.costeEstructura.toLocaleString('es-ES', { minimumFractionDigits: 2 })}€</p>
                     </div>
                   </div>
                 </div>
               )}
 
               {/* Finish Card */}
-              <div className="glass-panel rounded-4xl p-10 group hover:bg-white/[0.04] transition-colors">
+              <div className="glass-panel rounded-4xl p-10 group hover:bg-slate-50/50 dark:hover:bg-white/[0.04] transition-colors text-left">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
                   <div className="flex gap-8 items-center">
-                    <div className="w-16 h-16 rounded-[2rem] bg-slate-500/10 flex items-center justify-center text-slate-400 border border-white/5 group-hover:scale-110 transition-transform duration-500">
+                    <div className="w-16 h-16 rounded-[2rem] bg-slate-200 dark:bg-slate-500/10 flex items-center justify-center text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-white/5 group-hover:scale-110 transition-transform duration-500">
                       <Palette size={28} />
                     </div>
                     <div>
-                      <h4 className="font-black text-xl text-white tracking-tight leading-none mb-3">{ACCESORIOS.perfiles.nombre}</h4>
-                      <p className="text-sm text-slate-500 font-medium opacity-80">Remate perimetral de grado estético. Longitud estándar 2.2m.</p>
+                      <h4 className="font-black text-xl text-slate-900 dark:text-white tracking-tight leading-none mb-3">{ACCESORIOS.perfiles.nombre}</h4>
+                      <p className="text-sm text-slate-500 dark:text-slate-500 font-medium opacity-80">Remate perimetral de grado estético. Longitud estándar 2.2m.</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-4xl font-black text-white tracking-tighter leading-none">{calculos.numPerfiles}</p>
-                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-2">Unidades Perfil</p>
-                    <p className="text-amber-500 font-bold text-lg mt-4">{calculos.costeRemates.toLocaleString('es-ES', { minimumFractionDigits: 2 })}€</p>
+                    <p className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter leading-none">{calculos.numPerfiles}</p>
+                    <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-2">Unidades Perfil</p>
+                    <p className="text-amber-600 dark:text-amber-500 font-bold text-lg mt-4">{calculos.costeRemates.toLocaleString('es-ES', { minimumFractionDigits: 2 })}€</p>
                   </div>
                 </div>
               </div>
@@ -508,15 +528,15 @@ const App = () => {
           </section>
 
           {/* High-End Info Note */}
-          <div className="bg-gradient-to-tr from-amber-500/5 to-transparent border border-white/5 rounded-[3rem] p-10 relative overflow-hidden group">
+          <div className="bg-gradient-to-tr from-amber-500/5 dark:from-amber-500/5 to-transparent border border-slate-100 dark:border-white/5 rounded-[3rem] p-10 relative overflow-hidden group text-left">
             <div className="flex items-start gap-8 relative z-10">
-              <div className="w-14 h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 border border-amber-500/20 shrink-0 shadow-lg shadow-amber-500/5">
+              <div className="w-14 h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-500 border border-amber-500/20 shrink-0 shadow-lg shadow-amber-500/5">
                 <Info size={24} />
               </div>
               <div className="space-y-4">
-                <h5 className="font-black text-[11px] text-white uppercase tracking-[0.3em]">Compliance & Estándares 2026</h5>
-                <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                  Esta configuración se ha generado siguiendo los <span className="text-slate-300">protocolos técnicos de Naterial Professional</span>.
+                <h5 className="font-black text-[11px] text-slate-900 dark:text-white uppercase tracking-[0.3em]">Compliance & Estándares 2026</h5>
+                <p className="text-xs text-slate-500 dark:text-slate-500 leading-relaxed font-semibold">
+                  Esta configuración se ha generado siguiendo los <span className="text-slate-800 dark:text-slate-300">protocolos técnicos de Naterial Professional</span>.
                   Los coeficientes de desperdicio y resistencia estructural están optimizados para entornos residenciales de alta demanda.
                   Precios finales expresados con impuestos indirectos incluidos.
                 </p>
@@ -527,12 +547,12 @@ const App = () => {
       </main>
 
       <footer className="relative z-10 max-w-7xl mx-auto px-6 pt-10 pb-20 mt-10 print:hidden">
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent mb-12" />
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8 opacity-40 hover:opacity-100 transition-opacity">
-          <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.5em]">Forecasting System • Naterial Forest Pro • v4.2</p>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-200 dark:via-white/5 to-transparent mb-12" />
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 opacity-60 hover:opacity-100 transition-opacity">
+          <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.5em]">Forecasting System • Naterial Forest Pro • v4.2</p>
           <div className="flex items-center gap-6">
             <ArrowRight className="text-amber-500" size={16} />
-            <span className="text-[10px] font-black text-slate-200 tracking-widest">ECO-COMPLIANCE CERTIFIED</span>
+            <span className="text-[10px] font-black text-slate-800 dark:text-slate-200 tracking-widest">ECO-COMPLIANCE CERTIFIED</span>
           </div>
         </div>
       </footer>
