@@ -435,7 +435,11 @@ const App = () => {
                   </div>
                   <div>
                     <h4 className="font-bold text-base text-slate-900 dark:text-white">Material Principal: {gama.nombre}</h4>
-                    <p className="text-xs text-slate-500 font-medium">{tipo === 'lamas' ? 'Lamas de compuesto mineral de alta resistencia.' : 'Baldosas modulares de fácil instalación.'}</p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <p className="text-xs text-slate-500 font-medium">{tipo === 'lamas' ? 'Lamas de compuesto mineral de alta resistencia.' : 'Baldosas modulares de fácil instalación.'}</p>
+                      <div className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700" />
+                      <p className="text-[10px] font-mono font-bold text-leroy-green uppercase">REF: {variante.ref}</p>
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-12 sm:gap-16">
@@ -458,7 +462,11 @@ const App = () => {
                     </div>
                     <div>
                       <h4 className="font-bold text-base text-slate-900 dark:text-white">Sistema Estructural: {travesaño.nombre}</h4>
-                      <p className="text-xs text-slate-500 font-medium">Incluye {calculos.numClips} conectores {clipInfo?.nombre}.</p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <p className="text-xs text-slate-500 font-medium">Incluye {calculos.numClips} conectores {clipInfo?.nombre}.</p>
+                        <div className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700" />
+                        <p className="text-[10px] font-mono font-bold text-leroy-green uppercase">REF: {travesaño.ref}</p>
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-center gap-12 sm:gap-16">
@@ -481,7 +489,11 @@ const App = () => {
                   </div>
                   <div>
                     <h4 className="font-bold text-base text-slate-900 dark:text-white">Terminación: {ACCESORIOS.perfiles.nombre}</h4>
-                    <p className="text-xs text-slate-500 font-medium">Perfil en L para remate perimetral estético de 2.2m.</p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <p className="text-xs text-slate-500 font-medium">Perfil en L para remate perimetral estético de 2.2m.</p>
+                      <div className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700" />
+                      <p className="text-[10px] font-mono font-bold text-leroy-green uppercase">REF: {ACCESORIOS.perfiles.ref}</p>
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-12 sm:gap-16">
@@ -537,10 +549,11 @@ const App = () => {
           .lg\\:col-span-8 { width: 100% !important; }
           .bg-white, .bg-slate-50, .bg-slate-100 { background: white !important; border-bottom: 1px solid #eee !important; }
           .border { border: 1px solid #eee !important; }
-          .shadow-sm, .shadow-md { shadow: none !important; }
+          .shadow-sm, .shadow-md { box-shadow: none !important; }
           .text-leroy-green { color: #669900 !important; font-weight: bold; }
           .text-slate-950, .text-slate-900 { color: black !important; }
-          .text-slate-500, .text-slate-400 { color: #666 !important; }
+          .text-slate-500, .text-slate-400 { color: #555 !important; }
+          .font-mono { font-family: monospace !important; border: 1px solid #eee; padding: 1px 3px; border-radius: 2px; }
         }
       `}} />
     </div>
