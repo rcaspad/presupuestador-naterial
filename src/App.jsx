@@ -462,10 +462,19 @@ const App = () => {
                     </div>
                     <div>
                       <h4 className="font-bold text-base text-slate-900 dark:text-white">Sistema Estructural: {travesaño.nombre}</h4>
-                      <div className="flex items-center gap-2 mt-1">
-                        <p className="text-xs text-slate-500 font-medium">Incluye {calculos.numClips} conectores {clipInfo?.nombre}.</p>
-                        <div className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700" />
-                        <p className="text-[10px] font-mono font-bold text-leroy-green uppercase">REF: {travesaño.ref}</p>
+                      <div className="space-y-1 mt-1">
+                        <div className="flex items-center gap-2">
+                          <p className="text-xs text-slate-500 font-medium">Soporte: {calculos.numRastreles} rastreles de {travesaño.largo}m</p>
+                          <div className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700" />
+                          <p className="text-[9px] font-mono font-bold text-leroy-green uppercase">REF: {travesaño.ref}</p>
+                        </div>
+                        {clipInfo && (
+                          <div className="flex items-center gap-2">
+                            <p className="text-xs text-slate-500 font-medium">Fijación: {calculos.numClips} conectores {clipInfo.nombre}</p>
+                            <div className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700" />
+                            <p className="text-[9px] font-mono font-bold text-leroy-green uppercase">REF: {clipInfo.ref}</p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
