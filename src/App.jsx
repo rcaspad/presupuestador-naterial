@@ -551,18 +551,65 @@ const App = () => {
       <style dangerouslySetInnerHTML={{
         __html: `
         @media print {
-          @page { size: auto; margin: 1cm; }
-          body { background: white !important; color: black !important; font-size: 10pt; }
+          @page { size: auto; margin: 0.5cm; }
+          body { background: white !important; color: black !important; font-size: 8.5pt; line-height: 1.2; }
           nav, footer, .print\\:hidden { display: none !important; }
-          main { display: block !important; padding: 0 !important; }
-          .lg\\:col-span-8 { width: 100% !important; }
-          .bg-white, .bg-slate-50, .bg-slate-100 { background: white !important; border-bottom: 1px solid #eee !important; }
-          .border { border: 1px solid #eee !important; }
-          .shadow-sm, .shadow-md { box-shadow: none !important; }
-          .text-leroy-green { color: #669900 !important; font-weight: bold; }
+          main { display: block !important; padding: 0 !important; margin: 0 !important; }
+          .max-w-7xl { max-width: 100% !important; }
+          .lg\\:col-span-8 { width: 100% !important; display: block !important; }
+          
+          /* Titles and Headers */
+          h2 { font-size: 12pt !important; margin-bottom: 0.25rem !important; }
+          h3 { font-size: 10pt !important; margin-top: 0.75rem !important; margin-bottom: 0.25rem !important; }
+          .text-6xl { font-size: 20pt !important; }
+          .text-4xl { font-size: 18pt !important; }
+          .text-3xl { font-size: 14pt !important; }
+          .text-lg { font-size: 9pt !important; }
+          .text-xl { font-size: 10pt !important; }
+          
+          /* Space compression */
+          .p-12, .p-10, .p-8 { padding: 0.75rem !important; }
+          .p-6, .px-8, .py-6 { padding: 0.5rem !important; }
+          .mb-12, .gap-12 { margin-bottom: 0.5rem !important; gap: 0.5rem !important; }
+          .mt-12, .pt-12, .space-y-12 > * + * { margin-top: 0.5rem !important; }
+          .space-y-10 > * + * { margin-top: 0.5rem !important; }
+          .pt-8 { pt: 0.5rem !important; }
+          .gap-8 { gap: 0.5rem !important; }
+          .gap-6 { gap: 0.25rem !important; }
+          .space-y-6 > * + * { margin-top: 0.25rem !important; }
+          
+          /* Layout adjustments for Summary Section */
+          .flex-col.xl\\:flex-row { flex-direction: row !important; gap: 1rem !important; }
+          .xl\\:w-64 { width: auto !important; min-width: 150px !important; }
+          
+          /* Breakdown Rows Card styles */
+          .rounded-2xl { border-radius: 0.25rem !important; }
+          .bg-white, .bg-slate-50, .bg-slate-100 { 
+            background: white !important; 
+            border: 1px solid #ddd !important; 
+            margin-bottom: 0.15rem !important;
+          }
+          
+          /* Component Breakdown Specific */
+          .flex-col.md\\:flex-row { flex-direction: row !important; align-items: center !important; }
+          .w-12.h-12 { width: 1.5rem !important; height: 1.5rem !important; }
+          .w-12.h-12 svg { width: 0.8rem !important; height: 0.8rem !important; }
+          .w-16.h-16 { width: 2rem !important; height: 2rem !important; } /* Variant color box */
+          
+          .border { border: 1px solid #ddd !important; }
+          .shadow-sm, .shadow-md, .shadow-xl, .shadow-inner { box-shadow: none !important; }
+          .text-leroy-green { color: #517a00 !important; font-weight: bold; }
           .text-slate-950, .text-slate-900 { color: black !important; }
-          .text-slate-500, .text-slate-400 { color: #555 !important; }
-          .font-mono { font-family: monospace !important; border: 1px solid #eee; padding: 1px 3px; border-radius: 2px; }
+          .text-slate-500, .text-slate-400 { color: #444 !important; }
+          .font-mono { font-family: monospace !important; font-size: 7.5pt !important; background: #f5f5f5 !important; padding: 0px 2px; }
+          
+          .border-l-4 { border-left-width: 2px !important; }
+          
+          /* Footer elements for PDF */
+          .max-w-7xl.mx-auto.px-6.py-12 { padding: 0.5rem !important; margin-top: 1rem !important; }
+          
+          /* Avoid page breaks inside sections */
+          section, .bg-white, .bg-slate-100 { page-break-inside: avoid; }
         }
       `}} />
     </div>
